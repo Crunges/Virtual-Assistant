@@ -2,18 +2,18 @@
 # Будильник
 
 from datetime import datetime
-from playsound import playsound
+import playsound
 
 
-def validate_time(alarm_time):
-    if len(alarm_time) != 8:
+def validate_time(alarms_time):  # Проверка правильности введенных данных
+    if len(alarms_time) != 8:
         return "Неверный формат, попробуйте снова"
     else:
-        if int(alarm_time[0:2]) > 23:
+        if int(alarms_time[0:2]) > 23:
             return "Неверный формат часов, попробуйте снова"
-        elif int(alarm_time[3:5]) > 59:
+        elif int(alarms_time[3:5]) > 59:
             return "Неверный формат минут, попробуйте снова"
-        elif int(alarm_time[6:8]) > 59:
+        elif int(alarms_time[6:8]) > 59:
             return "Неверный формат секунд, попробуйте снова"
         else:
             return "ok"
@@ -40,9 +40,7 @@ while True:
     current_min = now.minute
     current_sec = now.second
 
-    if alarm_hour == current_hour:
-        if alarm_min == current_min:
-            if alarm_sec == current_sec:
-                print("Подъем!")
-                playsound('C:\\\\Users\\\\Lamar\\\\PycharmProjects\\\\Виртуальный помошник\\\\1.mp3')
-                break
+    if alarm_hour == current_hour and alarm_min == current_min and alarm_sec == current_sec:
+        print("Подъем!")
+        playsound.playsound(r"C:\Users\Lamar\PycharmProjects\Virtual Assistant\Alarm.mp3")
+        break
