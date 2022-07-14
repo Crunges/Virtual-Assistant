@@ -1,11 +1,18 @@
-# -*- coding: utf-8 -*-
+import requests
+import json
 
-Currencies = {"USD": 1.0, "RUB": 71.75, "JPY": 109.39, "EUR": 0.9}
+fromc = input("Enter from currency:")
+to = input("Enter to currency")
+amount = input("Enter amount currency")
+url = f"https://api.apilayer.com/fixer/convert?to={to}&from={fromc}&amount={amount}"
 
+payload = {}
+headers = {
+  "apikey": "3x8h3ELNU3M5JQLSwgG4rBxUovHGVtZ1"
+}
 
-def conveyor(summ: float, current: str, received: str) -> float:
-    heft = summ / Currencies[current]
-    return round(heft * Currencies[received], 2)
-
-
-print(conveyor(100, "RUB", "USD"))
+response = requests.request("GET", url, headers=headers, data=payload)
+result = response.text
+response = requests.get(url)
+json_data = json.loads(result)
+print("result:", json_data["result"])
